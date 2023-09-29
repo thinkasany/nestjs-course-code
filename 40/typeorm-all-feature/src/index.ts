@@ -88,14 +88,24 @@ AppDataSource.initialize().then(async () => {
     // console.log(users);
 
 
-const queryBuilder = await AppDataSource.manager.createQueryBuilder();
+// const queryBuilder = await AppDataSource.manager.createQueryBuilder();
 
-const user = await queryBuilder.select("user")
-    .from(User, "user")
-    .where("user.age = :age", { age: 21 })
-    .getOne();
+// const user = await queryBuilder.select("user")
+//     .from(User, "user")
+//     .where("user.age = :age", { age: 21 })
+//     .getOne();
 
-console.log(user);
+// console.log(user);
+
+
+await AppDataSource.manager.transaction(async manager => {
+    await manager.save(User, {
+        id: 4,
+        firstName: 'eee',
+        lastName: 'eee',
+        age: 20
+    });
+});
 
     // console.log("Inserting a new user into the database...")
     // const user = new User()
