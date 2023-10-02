@@ -1,5 +1,7 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
+import { Department } from "./entity/Department"
+import { Employee } from "./entity/Employee"
 import { User } from "./entity/User"
 
 export const AppDataSource = new DataSource({
@@ -10,8 +12,13 @@ export const AppDataSource = new DataSource({
     password: "123456",
     database: "typeorm_test",
     synchronize: true,
-    logging: false,
-    entities: [User],
+    logging: true,
+    entities: [Department, Employee],
     migrations: [],
     subscribers: [],
+    poolSize: 10,
+    connectorPackage: 'mysql2',
+    extra: {
+        authPlugin: 'sha256_password',
+    }
 })
