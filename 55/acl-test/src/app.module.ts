@@ -7,6 +7,7 @@ import { User } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
 import { AaaModule } from './aaa/aaa.module';
 import { BbbModule } from './bbb/bbb.module';
+import { RedisModule } from './redis/redis.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { BbbModule } from './bbb/bbb.module';
     UserModule,
     AaaModule,
     BbbModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],
