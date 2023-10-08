@@ -5,6 +5,8 @@ import { AppService } from './app.service';
 import { Permission } from './user/entities/permission.entity';
 import { User } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
+import { AaaModule } from './aaa/aaa.module';
+import { BbbModule } from './bbb/bbb.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { UserModule } from './user/user.module';
       },
     }),
     UserModule,
+    AaaModule,
+    BbbModule,
   ],
   controllers: [AppController],
   providers: [AppService],
