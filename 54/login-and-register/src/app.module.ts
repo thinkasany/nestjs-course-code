@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -21,6 +22,13 @@ import { UserModule } from './user/user.module';
       connectorPackage: 'mysql2',
       extra: {
         authPlugin: 'sha256_password',
+      },
+    }),
+    JwtModule.register({
+      global: true,
+      secret: 'guang',
+      signOptions: {
+        expiresIn: '7d',
       },
     }),
     UserModule,
