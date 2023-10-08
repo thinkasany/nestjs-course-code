@@ -13,7 +13,7 @@ export class UserController {
   }
 
   @Post('register')
-  register(@Body() user: RegisterDto) {
-    console.log(user);
+  async register(@Body() user: RegisterDto) {
+    return await this.userService.register(user);
   }
 }
