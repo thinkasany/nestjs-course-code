@@ -6,14 +6,18 @@ import {
   Patch,
   Param,
   Delete,
+  Inject,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserLoginDto } from './dto/user-login.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('user')
 export class UserController {
+  @Inject(JwtService)
+  private jwtService: JwtService;
   constructor(private readonly userService: UserService) {}
 
   @Get('init')
@@ -27,7 +31,16 @@ export class UserController {
     const user = await this.userService.login(loginUser);
 
     console.log(user);
-    return 'success';
+    const token = this.jwtService.sign({
+      user: {
+        username: user.username,
+        roles: user.roles,
+      },
+    });
+
+    return {
+      token,
+    };
   }
 
   @Post()

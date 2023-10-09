@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -6,9 +7,18 @@ import { Permission } from './user/entities/permission.entity';
 import { Role } from './user/entities/role.entity';
 import { User } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
+import { AaaModule } from './aaa/aaa.module';
+import { BbbModule } from './bbb/bbb.module';
 
 @Module({
   imports: [
+    JwtModule.register({
+      global: true,
+      secret: 'guang',
+      signOptions: {
+        expiresIn: '7d',
+      },
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -26,6 +36,8 @@ import { UserModule } from './user/user.module';
       },
     }),
     UserModule,
+    AaaModule,
+    BbbModule,
   ],
   controllers: [AppController],
   providers: [AppService],
