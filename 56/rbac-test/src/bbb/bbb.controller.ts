@@ -1,9 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { RequireLogin } from 'src/custom-decorator';
 import { BbbService } from './bbb.service';
 import { CreateBbbDto } from './dto/create-bbb.dto';
 import { UpdateBbbDto } from './dto/update-bbb.dto';
 
-@Controller('bbb')
+@Controller('aaa')
+@RequireLogin()
 export class BbbController {
   constructor(private readonly bbbService: BbbService) {}
 

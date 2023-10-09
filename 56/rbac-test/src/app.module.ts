@@ -9,6 +9,8 @@ import { User } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
 import { AaaModule } from './aaa/aaa.module';
 import { BbbModule } from './bbb/bbb.module';
+import { APP_GUARD } from '@nestjs/core';
+import { LoginGuard } from './login.guard';
 
 @Module({
   imports: [
@@ -40,6 +42,12 @@ import { BbbModule } from './bbb/bbb.module';
     BbbModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: LoginGuard,
+    },
+  ],
 })
 export class AppModule {}
