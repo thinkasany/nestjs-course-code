@@ -4,10 +4,10 @@ import redisClient from './redis'
 import userModel from './models/users'
 import jwt from 'jsonwebtoken'
 import { splitCookies, passwordMD5 } from './utils'
+import path from 'path'
 
 const app = express()
 app.use(bodyParser.json())
-
 const tokenConfig = {
   secret: 'token-secret',
   expiresIn: 60 * 60 * 24
@@ -65,6 +65,7 @@ app.post('/login', async (req, res, next) => {
   try {
     console.log('begin auth user')
     const user = await authUser(username, password)
+    console.log('user', user);
     const lastToken = user.token
     // 此处生成token，此处使用jwt
     const newToken = jwt.sign(
@@ -91,6 +92,10 @@ app.post('/login', async (req, res, next) => {
   } catch (err) {
     next(new Error(err))
   }
+})
+
+app.get('/', async (req, res, next) => {
+  return res.sendFile(path.resolve('./test.html'))
 })
 
 // 用户主动退出登录，将所有的子系统退出
@@ -168,7 +173,9 @@ const authUser = async (username, password) => {
     if (!dataValues) {
       throw new Error('this user does not exist.')
     }
-    if (dataValues.pass === passwordMD5(password)) {
+    console.log('dataValues', dataValues);
+    if (dataValues.pass === password) {
+    // if (dataValues.pass === passwordMD5(password)) {
       return dataValues
     }
     throw new Error('password is error')

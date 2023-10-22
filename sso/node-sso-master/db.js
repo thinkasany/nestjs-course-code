@@ -3,7 +3,7 @@ import config from './config/db'
 
 const db = new Sequelize(config.database, config.username, config.password, {
   host: config.host,
-  dialect: 'mssql'
+  dialect: 'mysql'
 })
 
 db.authenticate().then(() => {
@@ -14,5 +14,11 @@ db.authenticate().then(() => {
 }).catch(err => {
   console.error('Unable to connect to the database:', err)
 })
+
+// // 执行同步
+// db.sync({ force: true}).then(() => {
+//   console.log('sync ok')
+//   process.exit()
+// })
 
 export default db

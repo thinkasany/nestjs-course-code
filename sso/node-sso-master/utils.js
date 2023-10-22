@@ -1,6 +1,7 @@
 import crypto from 'crypto'
-import { salt } from './config/crypto'
 
+// 生成随机的盐值
+const salt = 'xxx'
 export const splitCookies = (cookie) => {
   const cookies = {}
   cookie && cookie.split(';').forEach(( item ) => {

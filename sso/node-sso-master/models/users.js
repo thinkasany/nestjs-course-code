@@ -1,7 +1,7 @@
 import db from '../db'
 import Sequelize from 'sequelize'
 
-const User = db.define('user', {
+const userModel = db.define('user', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true
@@ -21,4 +21,4 @@ const User = db.define('user', {
   timestamps: false
 })
 
-export default User
+export default userModel
