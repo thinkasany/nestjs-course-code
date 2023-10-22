@@ -17,6 +17,7 @@ import {
   FileFieldsInterceptor,
   AnyFilesInterceptor,
 } from '@nestjs/platform-express';
+import multer from 'multer';
 import { AppService } from './app.service';
 import { FileSizeValidationPipe } from './file-size-validation-pipe.pipe';
 import { MyFileValidator } from './MyFileValidator';
@@ -149,5 +150,18 @@ export class AppController {
   ) {
     console.log('body', body);
     console.log('file', file);
+  }
+
+  @Post('upload')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      dest: 'uploads',
+    }),
+  )
+  async uploadImage(@UploadedFile() file: any): Promise<any> {
+    console.log('photo controller', file);
+    // return file
+    const res = await this.appService.uploadImage(file);
+    return res;
   }
 }

@@ -9,6 +9,7 @@
   </head>
   <body>
     <input id="fileInput" type="file" multiple />
+    <!-- <img src="https://upload-bucket-think.oss-cn-beijing.aliyuncs.com/img/16979546546766855091232eb15de0017843df92b9183.jpg" /> -->
     <script>
       const fileInput = document.querySelector('#fileInput');
 
@@ -97,7 +98,17 @@
         console.log(res);
       }
 
-      fileInput.onchange = formData5;
+      async function formData8() {
+        const data = new FormData();
+        data.set('name', '光');
+        data.set('age', 20);
+        data.set('file', fileInput.files[0]);
+
+        const res = await axios.post('http://localhost:3000/upload', data);
+        console.log(res);
+      }
+
+      fileInput.onchange = formData8;
     </script>
   </body>
 </html>

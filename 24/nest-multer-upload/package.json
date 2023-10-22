@@ -23,6 +23,8 @@
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
+    "@types/ali-oss": "^6.16.10",
+    "ali-oss": "^6.18.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1"
   },
