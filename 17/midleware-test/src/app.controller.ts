@@ -3,7 +3,7 @@ import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get('hello')
   getHello(): string {
@@ -28,20 +28,23 @@ export class AppController {
     console.log('world2');
     return this.appService.getHello();
   }
-
+  // @Get('aaa')
+  // a1(@Next() next) {
+  //   return 'hello';
+  // }
   @Get('aaa')
-  a1(@Next() next, @Response({passthrough: true}) response) {
-    return 'hello'
+  a1(@Next() next, @Response({ passthrough: true }) response) {
+    return 'hello';
   }
 
   @Get('bbb')
   b1(@Next() next) {
     next();
-    return 'hello1'
+    return 'hello1';
   }
 
   @Get('bbb')
   b2() {
-    return 'hello2'
+    return 'hello2';
   }
 }
