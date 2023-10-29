@@ -34,6 +34,12 @@ enum Ggg {
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  // @Get()
+  // getHello(@Query('aa') aa: string): string {
+  //   return aa;
+  // }
+
+  // 参数默认是 string 类型 如上,我们可以通过 Pipe 把它转为整数：
   @Get()
   getHello(@Query('aa', ParseIntPipe) aa: number): number {
     return aa + 1;
