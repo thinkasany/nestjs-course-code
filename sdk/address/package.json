@@ -1,0 +1,19 @@
+{
+  "name": "address",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@alicloud/address-purification20191118": "^2.0.0",
+    "@alicloud/openapi-client": "^0.4.7",
+    "@alicloud/tea-typescript": "^1.8.0",
+    "@alicloud/tea-util": "^1.4.7",
+    "dotenv": "^16.3.1",
+    "ts-node": "^10.9.2"
+  }
+}
