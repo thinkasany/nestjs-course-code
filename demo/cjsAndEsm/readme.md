@@ -1,0 +1,1 @@
+在commonjs 中 使用esmodule的sdk
