@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React App</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+
+  <script type="text/babel">
+
+    function App() {
+        const [messages, setMessages] = React.useState([]);
+        React.useEffect(() => {
+          const eventSource = new EventSource('http://localhost:3001/stream');
+          eventSource.onmessage = ({ data }) => {
+            const newData = JSON.parse(data).msg.split('\n').filter(str => str.trim() !== '');
+            // console.log('New message', newData);
+            setMessages(newData);
+          };
+          return () => {
+            eventSource.close();
+          };
+        }, []);
+
+      return (
+        <div>
+          <ul>
+            {messages.map((message, index) => (
+              <li key={index}>{message}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
